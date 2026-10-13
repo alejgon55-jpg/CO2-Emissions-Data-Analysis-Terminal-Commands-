@@ -49,7 +49,7 @@ this repo up (see `README.md`) — `git init`/clone, creating your
 reconstruct it from memory at the end.
 
 ```bash
-git colne <repo>
+git clone <repo>
 cd <repo>
 ```
 
