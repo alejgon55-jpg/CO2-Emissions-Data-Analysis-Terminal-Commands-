@@ -180,14 +180,15 @@ curious to explore using this data? Pick two specific countries you're
 curious to compare, and look up their full rows.
 
 ```bash
-# TODO: a command that finds a specific country's row by name (repeat for
-# a second country of your choice)
+grep '^United States,' co2_emissions_2022.csv
+grep '^China,' co2_emissions_2022.csv
 ```
 
 **Output:**
-_TODO_
+United States,USA,2022,341534041,19493170182843,5055.403
+China,CHN,2022,1425179562,26966016991166,11711.808
 
-**My question:** _TODO_
+**My question:** Which country had higher CO2 emissions in 2022, the United States or China? 
 
 ## 8. AI-literacy reflection
 
@@ -198,10 +199,10 @@ fact before relying on it professionally — specific enough that you could
 actually follow it, not "I'll be careful."
 
 **Risks:**
-1. _TODO_
-2. _TODO_
+1. AI can give incorrect information, which could cause me to make the wrong conclusion about the data. 
+2. AI can misunderstand the data or the question I am asking and give me an answer that does not match the actual dataset. 
 
-**My rule:** _TODO_
+**My rule:** Before using an AI-provided fact in my work, I will check it against the original dataset or another reliable source. 
 
 ## 9. Something that went wrong (and how you figured it out)
 
@@ -212,10 +213,10 @@ this at least once. Paste the actual command and what actually happened
 fix — not "I googled it and it worked."
 
 ```bash
-# TODO: a command that errored, or gave you unexpected results
+cut -d',' -f2 co2_emissions_2022.csv | grep '^$' | wc -1
 ```
 
 **What happened:**
-_TODO: the actual error message, or the unexpected output you got_
+wc: illegal option --1
 
-**What it told me and how I fixed it:** _TODO_
+**What it told me and how I fixed it:** The error told me that -1 was not a valid option for the wc command. I realized I used the number 1 instaed of a lowercase l. I changed wc -1 to wc -l, then I ran the command again and it worked. 
