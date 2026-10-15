@@ -65,9 +65,14 @@ head -n 5               co2_emissions_2022.csv
 ```
 
 **Output:**
-_TODO: paste what you actually got_
+country,iso_code,year,population,gdp,co2
+Afghanistan,AFG,2022,40578847,53303471617,10.170
+Africa,,2022,1445862695,,1459.114
+Africa (GCP),,2022,,,1459.103
+Albania,ALB,2022,2827614,36171005594,4.498
 
-**What I notice:** _TODO — your raw observations, in your own words_
+**What I notice:** 
+The dataset has 6 columns. Country, iso_code, year, population, gdp, and co2. Also, there are some rows missing. 
 
 ## 2. Column names
 
@@ -75,12 +80,16 @@ Next you want to see just the column names by themselves — one per line is
 a lot easier to scan than one long comma-separated row.
 
 ```bash
-# TODO: a command (or combination of commands) that prints just the header
-# row, one column name per line
+head -n 1 co2_emissions_2022.csv | tr ',' '\n'
 ```
 
 **Output:**
-_TODO_
+country
+iso_code
+year
+population
+gdp
+co2
 
 ## 3. Column-by-column data type table
 
@@ -90,8 +99,12 @@ row. Column numbers for reference: `country`=1, `iso_code`=2, `year`=3,
 `population`=4, `gdp`=5, `co2`=6.
 
 ```bash
-# TODO: a command that prints the first 6 values from a single column
-# (repeat this for at least 5 of the 6 columns, swapping in each column's number)
+cut -d',' -f1 co2_emmisions_2022.csv | head -n 6
+cut -d',' -f2 co2_emmisions_2022.csv | head -n 6
+cut -d',' -f3 co2_emmisions_2022.csv | head -n 6
+cut -d',' -f4 co2_emmisions_2022.csv | head -n 6
+cut -d',' -f5 co2_emmisions_2022.csv | head -n 6
+cut -d',' -f6 co2_emmisions_2022.csv | head -n 6
 ```
 
 Fill in the table from what you actually saw — not a guess from the column
@@ -99,24 +112,25 @@ name alone:
 
 | Column | Inferred type | How I can tell |
 |---|---|---|
-| _TODO_ | _TODO_ | _TODO_ |
-| _TODO_ | _TODO_ | _TODO_ |
-| _TODO_ | _TODO_ | _TODO_ |
-| _TODO_ | _TODO_ | _TODO_ |
-| _TODO_ | _TODO_ | _TODO_ |
+| country | Text | The values are country names |
+| iso_code | Text | The values are letter codes |
+| year | Integer | The vaules are whole numbers |
+| population | Integer | The vaules are whole numbers |
+| gdp | Integer | The vaules are whole numbers |
+| co2 | Decimal | The values contain decimals |
 
 **In your own words:** what's the actual difference between a list/array
 and a table? (Not a definition you looked up — explain it the way you'd
 explain it to a friend who's never coded. No command needed for this one,
 just think about the table you just filled in above.)
 
-_TODO_
+A list/array is a group of values in one list, while a table organizes data into rows and columns. A table can show different types of information about each item, which makes the data easier to compare and understand.
 
 ## 4. Structured or unstructured?
 
 State whether this dataset is structured or unstructured, and why.
 
-_TODO_
+This dataset is structured because the data is organized into rows and colums, and each column has specifc type of information, such as country, year, population, etc. Each column has a specifc purpose.
 
 ## 5. Before you trust this data
 
@@ -128,27 +142,26 @@ You may need more than one command for this — piping (`|`) feeds one
 command's output into the next as input.
 
 ```bash
-# TODO: a command (or combination) that counts how many rows have a
-# BLANK iso_code
+cut -d',' -f2 co2_emissions_2022.csv | grep '^$' | wc -l
 ```
 
 **Output:**
-_TODO_
+36
 
 ```bash
-# TODO: the same idea, but for the gdp column
+cut -d',' -f5 co2_emissions_2022.csv | grep '^$' | wc -l
 ```
 
 **Output:**
-_TODO_
+89
 
 List **at least 2** specific things you'd want to know about how this
 dataset was collected, before trusting any conclusion drawn from it — ground
 at least one in the counts you just found.
 
 **My 2 concerns:**
-1. _TODO_
-2. _TODO_
+1. Why are 89 rows missing GDP values? This could affect the accuracy of the data.
+2. Why are 36 rows missing iso_code values? I would want to know if these values were left blank on purpose. 
 
 ## 6. Data-quality question for the source
 
@@ -157,7 +170,7 @@ phrase it as a real question you'd send to the data's source/maintainer. A
 good test: could they actually answer it with a concrete yes/no or fact —
 not "is this data good?"
 
-_TODO_
+Were the 89 missing GDP values left blank because the GDP data was unavailable for those rows?
 
 ## 7. Something you're actually curious about
 
